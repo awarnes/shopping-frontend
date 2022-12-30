@@ -1,15 +1,67 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import 'semantic-ui-css/semantic.min.css';
-import App from './App';
+import {
+  createBrowserRouter,
+  RouterProvider
+} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+
+import 'semantic-ui-css/semantic.min.css';
+
+import AuthLayout from './routes/AuthLayout';
+import Root from './routes/Root';
+import UserRoute from './routes/UserRoute';
+import ErrorPage from './routes/ErrorPage';
+import SignIn from './routes/SignInPage';
+import ShoppingListTab from './routes/ShoppingListTab';
+import ProductListTab from './routes/ProductListTab';
+import SettingsTab from './routes/SettingsTab';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AuthLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        element: <Root />,
+        path: '/',
+        children: [
+          {
+            path: '/sign-in',
+            element: <SignIn />
+          }
+        ]
+      },
+      {
+        path: '/user/:userId/',
+        element: <UserRoute />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: 'shopping',
+            element: <ShoppingListTab />
+          },
+          {
+            path: 'products',
+            element: <ProductListTab />
+          },
+          {
+            path: 'settings',
+            element: <SettingsTab />
+          }
+        ]
+      }
+    ]
+  }
+])
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
