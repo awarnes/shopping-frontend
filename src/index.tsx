@@ -12,10 +12,9 @@ import AuthLayout from './routes/AuthLayout';
 import Root from './routes/Root';
 import UserRoute from './routes/UserRoute';
 import ErrorPage from './routes/ErrorPage';
-import SignIn from './routes/SignInPage';
-import ShoppingListTab from './routes/ShoppingListTab';
-import ProductListTab from './routes/ProductListTab';
-import SettingsTab from './routes/SettingsTab';
+import ShoppingListTab from './containers/ShoppingListTab';
+import ProductListTab from './containers/ProductListTab';
+import SettingsTab from './containers/SettingsTab';
 
 const router = createBrowserRouter([
   {
@@ -25,13 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         element: <Root />,
-        path: '/',
-        children: [
-          {
-            path: '/sign-in',
-            element: <SignIn />
-          }
-        ]
+        path: '/'
       },
       {
         path: '/user/:userId/',

@@ -5,7 +5,7 @@ export interface User {
 }
 
 export type AuthContextType = {
-  user?: User;
+  user: User;
   signIn: (data: User) => void;
   signOut: () => void;
 }
